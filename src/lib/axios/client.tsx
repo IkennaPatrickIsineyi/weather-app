@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
 
 const axiosClient: AxiosInstance = axios.create({
-  baseURL: "", //`${process.env.REACT_APP_WEATHER_SERVER_BASE_URL}`,
+  baseURL: `${process.env.REACT_APP_WEATHER_SERVER_BASE_URL}`,
   timeout: 30000,
   headers: {
     "Content-Type": "application/json",
