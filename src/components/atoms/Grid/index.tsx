@@ -13,12 +13,5 @@ export default function Grid({ children, columns, gaps }: Props) {
     "3": "grid sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3",
   };
 
-  /*   const { cols, gap } = useMemo(() => {
-    return {
-      cols: `sm:grid-cols-${columns.sm} md:grid-cols-${columns.md} lg:grid-cols-${columns.lg}`,
-      gap: `sm:gap-[${gaps.sm}] md:gap-[${gaps.md}] lg:gap-[${gaps.lg}]`,
-    };
-  }, [columns, gaps]); */
-
   return <div className={columnMapping[columns]}>{children}</div>;
 }

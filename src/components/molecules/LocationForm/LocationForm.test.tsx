@@ -12,6 +12,7 @@ const getById = queryByAttribute.bind(null, "id");
 
 test("renders Zip code field", async () => {
   const dom = await act(async () => render(<App />));
+
   // Find the input field by its id
   const zipcodeInput = getById(dom.container, /zipcode/i);
 
