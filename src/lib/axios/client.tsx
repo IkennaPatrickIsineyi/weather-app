@@ -5,7 +5,6 @@ const axiosClient: AxiosInstance = axios.create({
   timeout: 30000,
   headers: {
     "Content-Type": "application/json",
-    Authorization: process.env.REACT_APP_WEATHER_SERVER_API_TOKEN,
   },
 });
 
@@ -25,7 +24,6 @@ const apiService = async (url: string, method: string, data?: any) => {
       method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: process.env.REACT_APP_WEATHER_SERVER_API_TOKEN,
       },
       data,
     });

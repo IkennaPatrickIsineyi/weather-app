@@ -49,8 +49,7 @@
   "devDependencies": {
     "tailwindcss": "^3.4.6",
     "@babel/plugin-proposal-private-property-in-object": "^7"
-  },
-  "proxy": "https://api.openweathermap.org",
+  }, 
   "overrides": {
     "react-scripts": {
       "typescript": "^5"
