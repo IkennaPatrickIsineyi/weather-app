@@ -1,6 +1,6 @@
 # Getting Started with The Weather App
 
-In the project directory, run:
+In the project directory, first install the dependencies by running:
 
 ### `npm install`
 
