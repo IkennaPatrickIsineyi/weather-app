@@ -1,17 +1,37 @@
 import { PropsWithChildren, useMemo } from "react";
 
-type ColumnType = "1" | "2" | "3";
+type ColTypeKeys = "xs" | "sm" | "md" | "lg";
+
 type Props = {
-  columns: ColumnType;
-  gaps: number;
+  cols: { [k in ColTypeKeys]?: number };
+  rowGap: { [k in ColTypeKeys]?: number };
+  colGap: { [k in ColTypeKeys]?: number };
 } & PropsWithChildren;
 
-export default function Grid({ children, columns, gaps }: Props) {
-  const columnMapping = {
-    "1": "grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1",
-    "2": "grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2",
-    "3": "grid sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3",
-  };
+export default function Grid({ children, cols, colGap, rowGap }: Props) {
+  const { colClass, rowGapClass, colGapClass } = useMemo(() => {
+    return {
+      colClass: `grid-cols-${cols.xs || 1} ${
+        cols.sm ? "sm:grid-cols-" + cols.sm : ""
+      }  ${cols.md ? "md:grid-cols-" + cols.md : ""} ${
+        cols.lg ? "lg:grid-cols-" + cols.lg : ""
+      }`,
+      rowGapClass: `${rowGap.xs ? "gap-y-" + rowGap.xs : ""} ${
+        rowGap.sm ? "gap-y-" + rowGap.sm : ""
+      } ${rowGap.md ? "gap-y-" + rowGap.md : ""} ${
+        rowGap.lg ? "gap-y-" + rowGap.lg : ""
+      }`,
+      colGapClass: `${colGap.xs ? "gap-x-" + colGap.xs : ""} ${
+        colGap.sm ? "gap-x-" + colGap.sm : ""
+      } ${colGap.md ? "gap-x-" + colGap.md : ""} ${
+        colGap.lg ? "gap-x-" + colGap.lg : ""
+      }`,
+    };
+  }, [cols, colGap, rowGap]);
 
-  return <div className={columnMapping[columns]}>{children}</div>;
+  return (
+    <div className={`grid ${colClass} ${colGapClass} ${rowGapClass}`}>
+      {children}
+    </div>
+  );
 }

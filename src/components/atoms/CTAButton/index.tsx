@@ -1,7 +1,11 @@
 import { ComponentType, useMemo } from "react";
 import IconContainer from "../IconContainer";
 import { SpinnerIcon } from "../Icons/Spinner";
-import { ColorPalette } from "../../../lib/types/theme/colors.type";
+import {
+  ColorPalette,
+  FullColorPalette,
+  TextColorPalette,
+} from "../../../lib/types/theme/colors.type";
 
 type BorderRadiusType = "sm" | "md" | "lg" | "full";
 
@@ -14,11 +18,13 @@ type Props = {
   showLoader?: boolean;
   borderRadius?: BorderRadiusType;
   bgcolor?: ColorPalette;
-  color?: ColorPalette;
-  loaderColor?: ColorPalette;
+  color?: TextColorPalette;
+  loaderColor?: FullColorPalette;
   disabled?: boolean;
-  borderColor?: ColorPalette;
+  hoverColor?: ColorPalette;
   type?: "submit";
+  paddingX?: number;
+  paddingY?: number;
 };
 
 export default function CTAButton({
@@ -33,10 +39,12 @@ export default function CTAButton({
   color = "white",
   loaderColor,
   disabled,
-  borderColor,
+  hoverColor,
+  paddingX = 3,
+  paddingY = 1,
   type,
 }: Props) {
-  const { defaultStyle, radius } = useMemo(() => {
+  const { bgc, hover, text, px, py, radius } = useMemo(() => {
     const radiusMapping: { [K in BorderRadiusType]: string } = {
       sm: "rounded-md",
       md: "rounded-xl",
@@ -44,14 +52,18 @@ export default function CTAButton({
       full: "rounded-full",
     };
     return {
-      defaultStyle: `bg-${"red"}-500 hover:bg-${bgcolor}-700 text-${color} border-${borderColor} px-3 py-1`,
       radius: radiusMapping[borderRadius],
+      bgc: `bg-${bgcolor}-500`,
+      hover: `lg:hover:bg-${hoverColor}-500`,
+      text: `text-${color}`,
+      px: `px-${paddingX}`,
+      py: `py-${paddingY}`,
     };
-  }, [bgcolor, color, borderRadius, borderColor]);
+  }, [bgcolor, hoverColor, color, borderRadius, paddingX, paddingY]);
 
   return (
     <button
-      className={`flex items-center gap-1 bg-red-500 hover:bg-red-700 text-white border-red px-3 py-1 rounded-md`}
+      className={`flex items-center gap-1 ${bgc} ${hover} ${text} ${px} ${py} ${radius}`}
       disabled={disabled}
       onClick={handleClick}
       id={id}
@@ -60,29 +72,19 @@ export default function CTAButton({
       {showLoader && (
         <IconContainer
           Icon={SpinnerIcon}
-          size="15px"
-          mobileSize="15px"
-          color="white"
+          size={4}
+          mobileSize={4}
+          color={loaderColor || color}
         />
       )}
       {!!StartIcon && (
-        <IconContainer
-          Icon={StartIcon}
-          size="15px"
-          mobileSize="15px"
-          color={color}
-        />
+        <IconContainer Icon={StartIcon} size={4} mobileSize={4} color={color} />
       )}
 
       <span>{label}</span>
 
       {!!EndIcon && (
-        <IconContainer
-          Icon={EndIcon}
-          size="15px"
-          mobileSize="15px"
-          color={color}
-        />
+        <IconContainer Icon={EndIcon} size={4} mobileSize={4} color={color} />
       )}
     </button>
   );

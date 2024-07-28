@@ -14,12 +14,7 @@ export default function WeatherInformation({ result, fetching }: Props) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 mx-auto">
       {fetching && (
-        <IconContainer
-          Icon={SpinnerIcon}
-          size="30px"
-          mobileSize="30px"
-          color="red"
-        />
+        <IconContainer Icon={SpinnerIcon} size={4} mobileSize={4} color="red" />
       )}
 
       {!!result && !fetching && (

@@ -1,5 +1,9 @@
 import { PropsWithChildren, useMemo } from "react";
-import { ColorPalette } from "../../../lib/types/theme/colors.type";
+import {
+  ColorPalette,
+  FullColorPalette,
+  TextColorPalette,
+} from "../../../lib/types/theme/colors.type";
 
 export type TextFontSizeType =
   | "body12"
@@ -15,7 +19,7 @@ export type TextFontWeightType = "light" | "normal" | "bold" | "semi_bold";
 type Props = {
   size: TextFontSizeType;
   weight: TextFontWeightType;
-  color?: ColorPalette;
+  color?: FullColorPalette;
 } & PropsWithChildren;
 
 export default function Text({
@@ -24,7 +28,7 @@ export default function Text({
   weight,
   color = "black",
 }: Props) {
-  const { fontSize, fontWeight } = useMemo(() => {
+  const { fontSize, fontWeight, textColor } = useMemo(() => {
     const fontWeights: { [K in TextFontWeightType]: string } = {
       light: "font-normal",
       normal: "font-medium",
@@ -42,10 +46,12 @@ export default function Text({
       body36: "text-4xl",
     };
 
-    return { fontSize: fontSizes[size], fontWeight: fontWeights[weight] };
-  }, [size, weight]);
+    return {
+      fontSize: fontSizes[size],
+      fontWeight: fontWeights[weight],
+      textColor: `text-${color}-600`,
+    };
+  }, [size, weight, color]);
 
-  return (
-    <p className={`${fontSize} ${fontWeight} text-${color}`}>{children}</p>
-  );
+  return <p className={`${fontSize} ${fontWeight} ${textColor}`}>{children}</p>;
 }
