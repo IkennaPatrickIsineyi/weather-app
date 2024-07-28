@@ -1,6 +1,9 @@
 # Goal
 
-This repo showcases implementation of React using Tailwind CSS. Atom design methodology is used. React query is used for API consumption. The API is from [openWeatherMap](https://openweathermap.org/).
+This repo showcases implementation of React using Tailwind CSS.
+Atom design methodology is used.
+React query is used for API consumption.
+The API is from [openWeatherMap](https://openweathermap.org/).
 
 # Getting Started with The Weather App
 
