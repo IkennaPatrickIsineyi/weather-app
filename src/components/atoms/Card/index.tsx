@@ -1,7 +1,13 @@
-import { PropsWithChildren } from "react";
+import { CSSProperties, PropsWithChildren } from "react";
 
-type Props = {} & PropsWithChildren;
+type Props = {
+  style?: CSSProperties;
+} & PropsWithChildren;
 
-export default function Card({ children }: Props) {
-  return <div className="shadow-md">{children}</div>;
+export default function Card({ children, style }: Props) {
+  return (
+    <div className="shadow-md" style={style}>
+      {children}
+    </div>
+  );
 }
